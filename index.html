@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shailesh Sharma's Personal Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: url('images/bg1.webp') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .date-time {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.2em;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .carousel {
+            width: 95%;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            animation: slideIn 2s ease-out;
+        }
+
+        .carousel img {
+            width: 100%;
+            display: block;
+        }
+
+        .welcome-message {
+            font-size: 2em;
+            margin-bottom: 20px;
+            animation: fadein 3s infinite, slideInFromLeft 1.5s ease-out;
+        }
+
+        @keyframes fadein {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .qr-buttons, .bank-details, .contact-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            animation: slideInFromRight 2s ease-out;
+        }
+
+        .qr-buttons button, .bank-details button, .contact-buttons button {
+            padding: 15px 25px;
+            font-size: 1.1em;
+            color: white;
+            background-color: #333;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .qr-buttons button:hover, .bank-details button:hover, .contact-buttons button:hover {
+            background-color: #555;
+            transform: scale(1.1);
+        }
+
+        .popup {
+            position: fixed;
+            display: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            text-align: center;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .popup-content img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #333;
+            transition: transform 0.3s;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .footer button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: white;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .footer button:hover {
+            background-color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-message {
+                font-size: 1.5em;
+            }
+            .qr-buttons button, .bank-details button, .contact-buttons button {
+                font-size: 0.9em;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Current Date and Time -->
+    <div class="date-time" id="date-time"></div>
+    
+    <div class="container">
+        <div class="welcome-message" id="welcome-message"></div>
+
+        <div class="carousel" id="carousel">
+            <img src="images/1.jpg" alt="Photo 1">
+            <img src="images/2.jpg" alt="Photo 2">
+            <img src="images/3.jpg" alt="Photo 3">
+        </div>
+
+        <!-- QR Buttons Section -->
+        <div class="qr-buttons">
+            <button onclick="showPopup('images/fb_qr.png')">Follow on Facebook</button>
+            <button onclick="showPopup('images/insta_qr.png')">Follow on Instagram</button>
+            <button onclick="showPopup('images/tiktok_qr.png')">Follow on TikTok</button>
+            <button onclick="showPopup('images/whatsapp_qr.png')">Chat on WhatsApp</button>
+        </div>
+
+        <!-- Bank Details Section -->
+        <div class="bank-details">
+            <button onclick="showPopup('images/bank_qr.jpg')">Bank Details</button>
+        </div>
+
+        <!-- Contact Buttons Section -->
+        <div class="contact-buttons">
+            <button onclick="sendEmail()">Send Email</button>
+            <button onclick="sendWhatsApp()">WhatsApp Message</button>
+        </div>
+    </div>
+
+    <!-- QR Code Popup -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="hidePopup()">&times;</span>
+            <img id="popup-image" src="" alt="QR Code">
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <button onclick="alert('This page was developed as a gift by Anup Chapain in Auckland. email: anupchapain@gmail.com')">About Developer</button>
+    </div>
+
+    <script>
+        // Display Current Date and Time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('date-time').textContent = now.toLocaleDateString('en-US', options);
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Carousel Logic
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('#carousel img');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 3000); // Change slide every 3 seconds
+        showSlide(currentSlide); // Show first slide initially
+
+        // Welcome Message Logic
+        const welcomeMessages = [
+            "Welcome to my world of words!",
+            "Adventure awaits within these lines.",
+            "Dive into stories of distant lands.",
+            "Photography speaks where words fail.",
+            "Every journey starts with a single step.",
+            "Reading fuels the mind’s voyage.",
+            "Capturing moments, one click at a time.",
+            "Let’s explore the world together!",
+            "From the lens to your eyes, enjoy the view.",
+            "Travel far, write deeply, live fully.",
+            "Wanderlust and ink on my fingertips.",
+            "Turning pages of life, one story at a time.",
+            "Chasing sunsets and collecting stories.",
+            "In pursuit of the perfect shot.",
+            "Writing is my window to the soul.",
+            "Every photo tells a tale of its own.",
+            "Journey with me through my travels.",
+            "Words that wander, photos that wonder.",
+            "Finding beauty in every corner of the world.",
+            "Join me on a literary adventure.",
+            "Capturing life, one frame at a time.",
+            "My travels are a storybook in pixels.",
+            "Reading between the lines of my journey.",
+            "Through the lens, I see the world anew.",
+            "Every story has a beginning. This is mine.",
+            "Discovering the world, one picture at a time.",
+            "A picture is worth a thousand words.",
+            "Welcome to my journal of wanderlust.",
+            "Ink, pixels, and passion. This is my space.",
+            "Embrace the journey. Read, travel, click."
+        ];
+
+        function showWelcomeMessage() {
+            const messageIndex = Math.floor(Math.random() * welcomeMessages.length);
+            document.getElementById('welcome-message').innerText = welcomeMessages[messageIndex];
+        }
+
+        setInterval(showWelcomeMessage, 3000); // Change welcome message every 3 seconds
+        showWelcomeMessage(); // Initial welcome message
+
+        // Popup Logic
+        function showPopup(imageSrc) {
+            const popup = document.getElementById('popup');
+            const popupImage = document.getElementById('popup-image');
+            popupImage.src = imageSrc;
+            popup.style.display = 'flex';
+        }
+
+        function hidePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Send Email Function
+        function sendEmail() {
+            window.location.href = "mailto:sailecsrma17@gmail.com?subject=from your personal page";
+        }
+
+        // WhatsApp Message Function
+        function sendWhatsApp() {
+            window.open("https://wa.me/9779841537328?text=Hello%20I%20found%20your%20personal%20page", "_blank");
+        }
+    </script>
+</body>
+</html>
