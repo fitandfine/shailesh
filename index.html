@@ -15,21 +15,37 @@
             overflow-x: hidden;
         }
 
-        .date-time {
+        .header {
+            background-color: rgba(0, 0, 0, 0.6); /* Translucent background */
+            padding: 10px 0;
             text-align: center;
-            margin-top: 10px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .date-time {
             font-size: 1.2em;
+            margin-bottom: 5px;
             animation: fadeIn 2s ease-out;
+        }
+
+        .welcome-message {
+            font-size: 1.8em;
+            margin: 10px 0;
+            animation: fadein 3s infinite;
         }
 
         .container {
             text-align: center;
-            padding: 20px;
+            padding: 80px 20px 20px; /* Added padding-top to accommodate fixed header */
             animation: fadeIn 2s ease-out;
         }
 
         .carousel {
             width: 95%;
+            max-width: 600px;
             margin: 20px auto;
             overflow: hidden;
             border-radius: 10px;
@@ -38,13 +54,15 @@
 
         .carousel img {
             width: 100%;
+            height: 300px;
+            object-fit: cover;
             display: block;
         }
 
-        .welcome-message {
-            font-size: 2em;
-            margin-bottom: 20px;
-            animation: fadein 3s infinite, slideInFromLeft 1.5s ease-out;
+        .personal-info {
+            font-size: 1.2em;
+            margin: 20px 0;
+            animation: fadeIn 2s ease-out;
         }
 
         @keyframes fadein {
@@ -63,37 +81,54 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        @keyframes slideInFromLeft {
-            from { transform: translateX(-100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideInFromRight {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .qr-buttons, .bank-details, .contact-buttons {
+        .buttons-section {
             margin-top: 20px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
             animation: slideInFromRight 2s ease-out;
         }
 
-        .qr-buttons button, .bank-details button, .contact-buttons button {
+        .buttons-section button {
             padding: 15px 25px;
-            font-size: 1.1em;
+            font-size: 1em;
             color: white;
             background-color: #333;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
+            flex: 0 0 calc(50% - 20px); /* Ensures two buttons per row */
         }
 
-        .qr-buttons button:hover, .bank-details button:hover, .contact-buttons button:hover {
+        .buttons-section button:hover {
             background-color: #555;
+            transform: scale(1.1);
+        }
+
+        .copy-button-section {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .copy-button-section button {
+            padding: 15px 25px;
+            font-size: 1em;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            flex: 0 0 calc(50% - 20px); /* Two buttons per row */
+        }
+
+        .copy-button-section button:hover {
+            background-color: #0056b3;
             transform: scale(1.1);
         }
 
@@ -120,7 +155,10 @@
         }
 
         .popup-content img {
-            max-width: 100%;
+            max-width: 300px; /* Set maximum width for uniform size */
+            max-height: 300px; /* Set maximum height for uniform size */
+            width: 100%;
+            height: auto;
             border-radius: 10px;
         }
 
@@ -164,43 +202,66 @@
             .welcome-message {
                 font-size: 1.5em;
             }
-            .qr-buttons button, .bank-details button, .contact-buttons button {
+            .buttons-section button,
+            .copy-button-section button {
                 font-size: 0.9em;
                 padding: 10px 15px;
+                flex: 0 0 100%; /* Full width for mobile */
             }
         }
     </style>
 </head>
 <body>
-    <!-- Current Date and Time -->
-    <div class="date-time" id="date-time"></div>
-    
-    <div class="container">
+    <!-- Header with Current Date and Time -->
+    <div class="header">
+        <div class="date-time" id="date-time"></div>
         <div class="welcome-message" id="welcome-message"></div>
+    </div>
 
+    <div class="container">
         <div class="carousel" id="carousel">
             <img src="images/1.jpg" alt="Photo 1">
             <img src="images/2.jpg" alt="Photo 2">
             <img src="images/3.jpg" alt="Photo 3">
         </div>
 
-        <!-- QR Buttons Section -->
-        <div class="qr-buttons">
-            <button onclick="showPopup('images/fb_qr.png')">Follow on Facebook</button>
-            <button onclick="showPopup('images/insta_qr.png')">Follow on Instagram</button>
-            <button onclick="showPopup('images/tiktok_qr.png')">Follow on TikTok</button>
-            <button onclick="showPopup('images/whatsapp_qr.png')">Chat on WhatsApp</button>
+        <!-- Personal Info -->
+        <div class="personal-info">
+            <p>Shailesh Sharma</p>
+            <p>Phone: +977 9841537328</p>
         </div>
 
-        <!-- Bank Details Section -->
-        <div class="bank-details">
-            <button onclick="showPopup('images/bank_qr.jpg')">Bank Details</button>
+        <!-- Buttons Section -->
+        <div class="buttons-section">
+            <!-- Call Button and QR Code -->
+            <button onclick="window.open('tel:+9779841537328', '_self')">&#x1F4DE; Call</button>
+            <button onclick="showPopup('images/call_qr.png')">&#x1F4F7; Call QR Code</button>
+
+            <!-- SMS Button and QR Code -->
+            <button onclick="window.open('sms:+9779841537328', '_self')">&#x1F4F1; SMS</button>
+            <button onclick="showPopup('images/sms_qr.png')">&#x1F4F7; SMS QR Code</button>
+
+            <!-- WhatsApp Button and QR Code -->
+            <button onclick="sendWhatsApp()">&#x1F4AC; WhatsApp Message</button>
+            <button onclick="showPopup('images/whatsapp_qr.png')">&#x1F4F7; WhatsApp QR Code</button>
+
+            <!-- Email Button and QR Code -->
+            <button onclick="sendEmail()">&#x2709; Send Email</button>
+            <button onclick="showPopup('images/email_qr.png')">&#x1F4F7; Email QR Code</button>
+
+            <!-- TikTok Button and QR Code -->
+            <button onclick="window.open('https://www.tiktok.com/@asoulwriter', '_blank')">&#x1F3A4; Follow on TikTok</button>
+            <button onclick="showPopup('images/tiktok_qr.png')">&#x1F4F7; TikTok QR Code</button>
+
+            <!-- Instagram Button and QR Code -->
+            <button onclick="window.open('https://www.instagram.com/sailec_srma/', '_blank')">&#x1F4F7; Follow on Instagram</button>
+            <button onclick="showPopup('images/insta_qr.png')">&#x1F4F7; Instagram QR Code</button>
         </div>
 
-        <!-- Contact Buttons Section -->
-        <div class="contact-buttons">
-            <button onclick="sendEmail()">Send Email</button>
-            <button onclick="sendWhatsApp()">WhatsApp Message</button>
+        <!-- Copy Bank Account Button Section -->
+        <div class="copy-button-section">
+            <button onclick="copyBankAccount()">Copy Bank Account (Global IME)</button>
+            <button onclick="showPopup('images/bank_qr.jpg')">&#x1F4F7; Bank QR Code</button>
         </div>
     </div>
 
@@ -214,7 +275,9 @@
 
     <!-- Footer Section -->
     <div class="footer">
-        <button onclick="alert('This page was developed as a gift by Anup Chapain in Auckland. email: anupchapain@gmail.com')">About Developer</button>
+        <button onclick="alert('This page was developed as a gift by Anup Chapain in Auckland. Email: anupchapain@gmail.com')">About Developer</button>
+        <button onclick="showPopup('images/page_qr.png')">Share This Page via QR Code</button>
+        <button onclick="sharePage()">Share This Page</button>
     </div>
 
     <script>
@@ -308,6 +371,33 @@
         // WhatsApp Message Function
         function sendWhatsApp() {
             window.open("https://wa.me/9779841537328?text=Hello%20I%20found%20your%20personal%20page", "_blank");
+        }
+
+        // Function to share the page using the native share feature
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Check out Shailesh Sharma\'s Personal Page!',
+                    text: 'Explore Shailesh Sharma\'s personal page, full of travel, photography, and more!',
+                    url: window.location.href
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                }).catch((error) => {
+                    console.error('Error sharing:', error);
+                });
+            } else {
+                alert('Sharing is not supported on this device. Please use the QR code instead.');
+            }
+        }
+
+        // Copy Bank Account to Clipboard Function
+        function copyBankAccount() {
+            const accountNumber = '32107010005388';
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                alert('Bank account number copied to clipboard: ' + accountNumber);
+            }, (err) => {
+                console.error('Failed to copy: ', err);
+            });
         }
     </script>
 </body>
