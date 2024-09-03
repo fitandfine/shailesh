@@ -381,14 +381,14 @@
             <button onclick="downloadVCard()">&#x1F4C1; Save Contact</button>
         </div>
     </div>
-
-    <!-- QR Code Popup -->
-    <div class="popup" id="popup">
-        <div class="popup-content">
-            <span class="close-btn" onclick="hidePopup()">&times;</span>
-            <img id="popup-image" src="" alt="QR Code">
-        </div>
+<!-- Popup Template for QR Codes -->
+<div class="popup" id="generic-popup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="hidePopup('generic-popup')">&times;</span>
+        <img id="popup-image" src="" alt="QR Code" style="max-width: 300px;">
     </div>
+</div>
+
 
    <!-- Footer Section -->
 <div class="footer">
@@ -541,23 +541,24 @@
             }
         }
     
-        // Hide Popup Function
-        function hidePopup(popupId) {
-            document.getElementById(popupId).style.display = 'none';
-        }
-    
+     
         // Send Email to Developer
         function sendDeveloperEmail() {
             window.location.href = "mailto:pleasedontgetconfused@gmail.com?subject=Enquiry From Shailesh's page";
         }
     
-        // Show Generic Popup for QR Codes
-        function showPopup(imageSrc) {
-            const popup = document.getElementById('generic-popup');
-            const popupImage = document.getElementById('popup-image');
-            popupImage.src = imageSrc;
-            popup.style.display = 'flex';
-        }
+         // Function to Show Popup with QR Code
+    function showPopup(imageSrc) {
+        const popup = document.getElementById('generic-popup');
+        const popupImage = document.getElementById('popup-image');
+        popupImage.src = imageSrc;
+        popup.style.display = 'flex';
+    }
+
+    // Function to Hide Popup
+    function hidePopup(popupId) {
+        document.getElementById(popupId).style.display = 'none';
+    }
     </script>
     
 </body>
