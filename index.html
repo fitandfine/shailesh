@@ -65,22 +65,6 @@
             animation: fadeIn 2s ease-out;
         }
 
-        @keyframes fadein {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
         .buttons-section {
             margin-top: 20px;
             display: flex;
@@ -107,29 +91,55 @@
             transform: scale(1.1);
         }
 
-        .copy-button-section {
-            margin-top: 30px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
         }
 
-        .copy-button-section button {
-            padding: 15px 25px;
+        .dropdown button {
+            padding: 15px 20px;
             font-size: 1em;
             color: white;
-            background-color: #007BFF;
+            background-color: #e67e22;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            flex: 0 0 calc(50% - 20px); /* Two buttons per row */
+            width: 90%;
+            max-width: 300px;
+            text-align: center;
+            transition: background-color 0.3s;
         }
 
-        .copy-button-section button:hover {
-            background-color: #0056b3;
-            transform: scale(1.1);
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-content button {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            border: none;
+            background: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         .popup {
@@ -202,23 +212,125 @@
             .welcome-message {
                 font-size: 1.5em;
             }
-            .buttons-section button,
-            .copy-button-section button {
+            .buttons-section button {
                 font-size: 0.9em;
                 padding: 10px 15px;
                 flex: 0 0 100%; /* Full width for mobile */
             }
         }
+
+        @keyframes fadein {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        #name h1, #name h2 {
+    background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+    color: #ffffff; /* White text color for contrast */
+    padding: 2px; /* Add some padding around the text */
+    border-radius: 8px; /* Rounded corners */
+    display: inline-block; /* Shrink the background to the size of the text */
+}
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(0, 77, 64, 0.9);
+    width: 100%;
+}
+
+.footer button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #004d40;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.footer button:hover {
+    background-color: #00251a;
+}
+
+/* Popup Styles */
+.popup {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 90%;
+    animation: fadeIn 0.5s ease-in-out;
+    color: #333;
+    font-size: 1.2em;
+    position: relative;
+}
+
+.popup-content p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #e74c3c;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.close-btn:hover {
+    transform: rotate(90deg);
+    color: #c0392b;
+}
+
     </style>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V9N72WP38R"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2GSRNX4SZM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-V9N72WP38R');
+  gtag('config', 'G-2GSRNX4SZM');
 </script>
+    <script>// Copy Bank Account to Clipboard Function
+        function copyBankAccount() {
+            const accountNumber = '32107010005388'; // Replace with the actual bank account number if different
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                alert('Bank account number copied to clipboard: ' + accountNumber);
+            }, (err) => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+        </script>
 </head>
 <body>
     <!-- Header with Current Date and Time -->
@@ -236,41 +348,37 @@
 
         <!-- Personal Info -->
         <div class="personal-info">
-            <p>Shailesh Sharma</p>
-            <p>Phone: +977 9841537328</p>
+            <div id="name"><p><h1>Shailesh Sharma</h1></p>
+            <p><h2>+9779841537328</h2></p>
+        </div>
+        </div>
+
+        <!-- Dropdown for QR Codes -->
+        <div class="dropdown">
+            <button>QR Codes</button>
+            <div class="dropdown-content">
+                <button onclick="showPopup('images/bank_qr.jpg')">&#x1F4F7;Bank QR</button>
+                <button onclick="showPopup('images/call_qr.png')">&#x1F4F7;Phone</button>
+                <button onclick="showPopup('images/sms_qr.png')">&#x1F4F7; SMS</button>
+                <button onclick="showPopup('images/whatsapp_qr.png')">&#x1F4F7; WhatsApp</button>
+                <button onclick="showPopup('images/email_qr.png')">&#x1F4F7; Email</button>
+                <button onclick="showPopup('images/tiktok_qr.png')">&#x1F4F7; TikTok</button>
+                <button onclick="showPopup('images/insta_qr.png')">&#x1F4F7; Instagram</button>
+                <button onclick="showPopup('images/sharma_vcard.png')">&#x1F4F7; VCard</button>
+            </div>
         </div>
 
         <!-- Buttons Section -->
         <div class="buttons-section">
-            <!-- Call Button and QR Code -->
             <button onclick="window.open('tel:+9779841537328', '_self')">&#x1F4DE; Call</button>
-            <button onclick="showPopup('images/call_qr.png')">&#x1F4F7; Call QR Code</button>
-
-            <!-- SMS Button and QR Code -->
             <button onclick="window.open('sms:+9779841537328', '_self')">&#x1F4F1; SMS</button>
-            <button onclick="showPopup('images/sms_qr.png')">&#x1F4F7; SMS QR Code</button>
-
-            <!-- WhatsApp Button and QR Code -->
             <button onclick="sendWhatsApp()">&#x1F4AC; WhatsApp Message</button>
-            <button onclick="showPopup('images/whatsapp_qr.png')">&#x1F4F7; WhatsApp QR Code</button>
-
-            <!-- Email Button and QR Code -->
-            <button onclick="sendEmail()">&#x2709; Send Email</button>
-            <button onclick="showPopup('images/email_qr.png')">&#x1F4F7; Email QR Code</button>
-
-            <!-- TikTok Button and QR Code -->
-            <button onclick="window.open('https://www.tiktok.com/@asoulwriter', '_blank')">&#x1F3A4; Follow on TikTok</button>
-            <button onclick="showPopup('images/tiktok_qr.png')">&#x1F4F7; TikTok QR Code</button>
-
-            <!-- Instagram Button and QR Code -->
-            <button onclick="window.open('https://www.instagram.com/sailec_srma/', '_blank')">&#x1F4F7; Follow on Instagram</button>
-            <button onclick="showPopup('images/insta_qr.png')">&#x1F4F7; Instagram QR Code</button>
-        </div>
-
-        <!-- Copy Bank Account Button Section -->
-        <div class="copy-button-section">
             <button onclick="copyBankAccount()">Copy Bank Account (Global IME)</button>
-            <button onclick="showPopup('images/bank_qr.jpg')">&#x1F4F7; Bank QR Code</button>
+            <button onclick="sendEmail()">&#x2709; Send Email</button>
+            <button onclick="window.open('https://www.tiktok.com/@asoulwriter', '_blank')">&#x1F3A4; Follow on TikTok</button>
+            <button onclick="window.open('https://www.instagram.com/sailec_srma/', '_blank')">&#x1F4F7; Follow on Instagram</button>
+            <!-- Download vCard Button -->
+            <button onclick="downloadVCard()">&#x1F4C1; Save Contact</button>
         </div>
     </div>
 
@@ -282,12 +390,22 @@
         </div>
     </div>
 
-    <!-- Footer Section -->
-    <div class="footer">
-        <button onclick="alert('This page was developed as a gift by Anup Chapain in Auckland. Email: anupchapain@gmail.com')">About Developer</button>
-        <button onclick="showPopup('images/page_qr.png')">Share This Page via QR Code</button>
-        <button onclick="sharePage()">Share This Page</button>
+   <!-- Footer Section -->
+<div class="footer">
+    <button onclick="showDeveloperInfo()">About Developer</button>
+    <button onclick="sharePage()">Share This Page</button>
+    <button onclick="showPopup('images/page_qr.png')">Share QR</button>
+</div>
+
+<!-- Popup for Developer Info -->
+<div class="popup" id="developer-popup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="hidePopup('developer-popup')">&times;</span>
+        <p>This page was developed with love by Anup Chapain. For any inquiries or custom page development, feel free to get in touch!</p>
+        <button onclick="sendDeveloperEmail()">Email the Developer</button>
     </div>
+</div>
+
 
     <script>
         // Display Current Date and Time
@@ -357,7 +475,7 @@
             document.getElementById('welcome-message').innerText = welcomeMessages[messageIndex];
         }
 
-        setInterval(showWelcomeMessage, 3000); // Change welcome message every 3 seconds
+        setInterval(showWelcomeMessage, 4000); // Change welcome message every 3 seconds
         showWelcomeMessage(); // Initial welcome message
 
         // Popup Logic
@@ -382,12 +500,17 @@
             window.open("https://wa.me/9779841537328?text=Hello%20I%20found%20your%20personal%20page", "_blank");
         }
 
+        // Download vCard Function
+        function downloadVCard() {
+            window.location.href = 'contact.vcf';
+        }
+
         // Function to share the page using the native share feature
         function sharePage() {
             if (navigator.share) {
                 navigator.share({
                     title: 'Check out Shailesh Sharma\'s Personal Page!',
-                    text: 'Explore Shailesh Sharma\'s personal page, full of travel, photography, and more!',
+                    text: 'Explore Shailesh Sharma\'s personal page and more!',
                     url: window.location.href
                 }).then(() => {
                     console.log('Thanks for sharing!');
@@ -398,16 +521,44 @@
                 alert('Sharing is not supported on this device. Please use the QR code instead.');
             }
         }
-
-        // Copy Bank Account to Clipboard Function
-        function copyBankAccount() {
-            const accountNumber = '32107010005388';
-            navigator.clipboard.writeText(accountNumber).then(() => {
-                alert('Bank account number copied to clipboard: ' + accountNumber);
-            }, (err) => {
-                console.error('Failed to copy: ', err);
-            });
+    </script>
+    <script>
+        // Show Developer Info Popup
+        function showDeveloperInfo() {
+            document.getElementById('developer-popup').style.display = 'flex';
+        }
+    
+        // Share Page Function
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Shailesh Sharma - Contact Page',
+                    text: 'Check out Shailesh\'s personal profile and connect with him directly!',
+                    url: window.location.href
+                });
+            } else {
+                alert('Sharing is not supported on this device. Please use the QR code instead.');
+            }
+        }
+    
+        // Hide Popup Function
+        function hidePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+    
+        // Send Email to Developer
+        function sendDeveloperEmail() {
+            window.location.href = "mailto:pleasedontgetconfused@gmail.com?subject=Enquiry From Shailesh's page";
+        }
+    
+        // Show Generic Popup for QR Codes
+        function showPopup(imageSrc) {
+            const popup = document.getElementById('generic-popup');
+            const popupImage = document.getElementById('popup-image');
+            popupImage.src = imageSrc;
+            popup.style.display = 'flex';
         }
     </script>
+    
 </body>
 </html>
